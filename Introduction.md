@@ -28,8 +28,8 @@ OBS!! The scripts and  files should be downloaded into the folder containing the
 
 ```
 mkdir INTRO
-cp -p Intro.Rev lab_1/
-cp -p myScript.sh lab1/
+cp -p Intro.Rev INTRO/
+cp -p myScript.sh INTRO/
 ```
 
 ## Launching RevBayes from your computer
@@ -162,7 +162,7 @@ bash myScript.sh
 
 ## Launching RevBayes with a bash file
 
-Finally, we can use a bash file if we are running the script within a cluster. Below, is an example of a bash file to run the `Intro.Rev` script in RevBayes. Because we are running in a cluster, we need to include a command for the output to be saved. You can find this script `myScript-cluster.sh` in the `Intro` folder.
+Finally, we can use a bash file if we are running the script within a cluster. Below, is an example of a bash file to run the `Intro.Rev` script in RevBayes. Because we are running in a cluster, we need to include a command for the output to be saved. You can find this script `myScript-cluster.sh` in the `INTRO` folder.
 
 ```
 #!/bin/bash                                                                                                             
