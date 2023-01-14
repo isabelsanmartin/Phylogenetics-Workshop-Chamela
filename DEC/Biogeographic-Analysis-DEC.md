@@ -16,7 +16,7 @@ CTMC models are used in historical inference disciplines, such as molecular evol
 Figure 1 provides an overview of a CTMC model (Sanmartin, 2022). The states of the CTMC are discrete geographic areas (A, B) that form the distribution range of a taxon (A, B), and transitions between states (A to B, B to A) are governed by an instantaneous Q matrix with rate parameters (p, q) that are estimated from the data. Given a phylogeny with time-calibrated branch lengths, tip distributions coded as discrete entities (A, B), and a stochastic CTMC model of range evolution (Q matrix, Fig. 1), one can estimate the probability of range evolution (by dispersal, extinction, range expansion) as a function of time, using statistical inference approaches such as Maximum Likelihood or Bayesian Inference.
 
 
-![Figure1](figures/Figure1.png "Figure 1")*Parametric models in biogeographic inference. a. BIB. b. DEC*
+![Figure1](figures/Figure1.png "Figure 1")*Parametric CTMC models in biogeographic inference. a. Standard CTMC model (BIB). b. Dispersal-Extinction Cladogenesis model (DEC)*
 
 
 The first two parametric methods developed in biogeography (Figure 1) were the Bayesian Island Biogeography (BIB) model (Sanmartín et al. 2008) and the Dispersal-Extinction-Cladogenesis (DEC) model (Ree et al. 2005; Ree and Smith 2008). We will focus on the latter here.
