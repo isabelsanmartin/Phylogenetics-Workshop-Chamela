@@ -3,7 +3,7 @@
 
 Instructor: **Isabel Sanmartin**
 
-For a very good introduction to the DEC model, go to [Tutorials](https://revbayes.github.io/tutorials/biogeo/biogeo_intro.html)
+For a very good introduction to the DEC model, go to [Tutorials Biogeography](https://revbayes.github.io/tutorials/biogeo/biogeo_intro.html)
 
 ### Parametric biogeographic models
 
