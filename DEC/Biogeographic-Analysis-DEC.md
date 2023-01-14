@@ -1,9 +1,9 @@
 
-# Introduction to the Dispersal-Extinction-Cladogenesis (DEC) Model in RevBayes (Sanmartin, 2022)
+# Introduction to the Dispersal-Extinction-Cladogenesis (DEC) Model in RevBayes
 
 Instructor: **Isabel Sanmartin**
 
-For a very good introduction to the DEC model, go to [Tutorials](https://revbayes.github.io/tutorials/biogeo/biogeo_intro.html){:target="_blank"}
+For a very good introduction to the DEC model, go to [Tutorials](https://revbayes.github.io/tutorials/biogeo/biogeo_intro.html)
 
 ### Parametric biogeographic models
 
@@ -13,10 +13,10 @@ The last decade has witnessed the introduction of parametric approaches in bioge
 One popular parametric approach in biogeography is the continuous-time Markov Chain (CTMC) model, a parametric model with stochastic variables that are time-dependent. CTMC models are typically used to describe range evolution at the species level. A Markov chain is a stochastic, memory-less process that models transitions between discrete states over continuous or discrete-time; the probability of each transition event depends only on the state attained in the previous event.
 CTMC models are used in historical inference disciplines, such as molecular evolution (nucleotide substitution models), morphological evolution, or phylogenetic biogeography, where the states observed in the present are the result of a stochastic process that evolves over time. Stochastic means that, unlike in a deterministic process, the outcome of the process cannot be predicted with certainty, i.e., we cannot predict the result of evolution. At the same time, evolutionary processes are not entirely random or unpredictable: they can be described by probability distributions with parameters, whose values we infer from the data.
 
-Figure 1 provides an example of the parametric approach (Sanmartin, 2022). In biogeography, the states of the stochastic CTMC process that governs range evolution are the set of discrete geographic areas that form the distribution range of a taxon (e.g., A, AB, B). The rates of transition or change between states in the CTMC process (e.g., A to B), within an infinitesimal amount of time (dt), are governed by the so-called instantaneous rate matrix Q, which has as parameters biogeographic processes that determine the probability of range evolution as a function of time, e.g., dispersal, extinction, speciation. Given a phylogeny with time-calibrated branch lengths, tip distributions coded as discrete entities (A, B), and a stochastic CTMC model of range evolution (Q matrix, Fig. 5), one can estimate the probabilities of ancestral ranges (A, B, AB) and the rate of parameters describing the transition between geographical ranges (p, q, DAB, EB, in Fig. 1), using statistical inference approaches such as maximum Likelihood (ML) or Bayesian Inference (BI).
+Figure 1 provides an example of the parametric approach (Sanmartin, 2022). In biogeography, the states of the stochastic CTMC process that governs range evolution are the set of discrete geographic areas that form the distribution range of a taxon (e.g., A, AB, B). The rates of transition between states in the CTMC process (e.g., A to B), within an infinitesimal amount of time (dt), are governed by the so-called instantaneous rate matrix Q, which has as parameters biogeographic processes that determine the probability of range evolution as a function of time, e.g., dispersal, extinction, speciation. Given a phylogeny with time-calibrated branch lengths, tip distributions coded as discrete entities (A, B), and a stochastic CTMC model of range evolution (Q matrix, Fig. 1), one can estimate the probabilities of ancestral ranges (A, B, AB) and the rate of parameters describing the transition between geographical ranges (p, q, DAB, EB, in Fig. 1), using statistical inference approaches such as maximum Likelihood (ML) or Bayesian Inference (BI).
 
 
-![Figure1](figures/Figure1.png "Figure 1")*Continuous-time Markov chain biogeographic models :a. BIB. b. DEC*
+![Figure1](figures/Figure1.png "Figure 1")*Parametric models in biogeographic inference. Top: A continuous-time Markov Chain (CTMC) process is used to describe the probability of range evolution; the states of the CTMC are discrete geographic ranges (A, B, AB), and transitions between states (A to B) are governed by an instantaneous Q matrix with rate parameters (q) that are estimated from the data.*
 
 
 The first two parametric methods developed in biogeography (Figure 1) were the Bayesian Island Biogeography (BIB) model (Sanmartín et al. 2008) and the Dispersal-Extinction-Cladogenesis (DEC) model (Ree et al. 2005; Ree and Smith 2008). We will focus on the latter here.
