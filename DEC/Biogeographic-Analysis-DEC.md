@@ -1,18 +1,14 @@
-# Biogeographic Analysis with DEC
-
-Instructor: **Isabel Sanmartin**
 
 # Introduction to the Dispersal-Extinction-Cladogenesis (DEC) Model in RevBayes (Sanmartin, 2022)
+
+Instructor: **Isabel Sanmartin**
 
 For a very good introduction to the DEC model, go to [Tutorials](https://revbayes.github.io/tutorials/biogeo/biogeo_intro.html){:target="_blank"}
 
 ### Parametric biogeographic models
 
 The last decade has witnessed the introduction of parametric approaches in biogeography (Ronquist & Sanmartin, 2011). A common feature of these methods is the use of statistical probabilistic models, whose variables or parameters are quantifiable biogeographic processes that are dependent on time. Thus, in addition to the tree topology and tip distributions, parametric models incorporate a third source of information: branch lengths—measured in numbers or units of time—provide direct evidence on the rate or probability of geographic evolution. Longer branches imply a higher probability of changes in geographic range than shorter branches. As more time elapses since the divergence of the species from its ancestor, there is more opportunity for biogeographic change (by dispersal, extinction, or range expansion) along the branch. Branch lengths also inform on the certainty or degree of error in biogeographic inference: a species subtended by a long branch would be associated with a higher uncertainty about its ancestral range than one subtended by a short branch (Sanmartin, 2022).
-Besides the possibility of integrating time into biogeographic inference, parametric methods offer several advantages over parsimony-based approaches (Ree and Sanmartin 2009). Rather than inferring only the most parsimonious reconstruction, one can integrate over all possible biogeographical scenarios in the estimation of rates of biogeographic parameters and species ancestral ranges; i.e., parametric methods account for the "reconstruction uncertainty" (Ronquist, 2004; Ree and Smith 2008). If BI is used, parameter estimates are not conditioned on a given phylogeny but marginalized over the tree topology and branch lengths by estimating simultaneously the parameters governing phylogenetic and biogeographic evolution; i.e., BI parametric methods account for "phylogenetic uncertainty" (Ronquist, 2004; Sanmartín et al. 2008). 
-Sources of evidence other than the phylogeny and tip distributions (e.g., the fossil record, geological or paleoclimate information or the species ecology) can be integrated into parametric models, either in the form of new parameters in the Q matrix or through scaling parameters that modify the baseline rate of a different parameter (Buerki et al. 2011; Meseguer et al. 2015; Quintero and Landis, 2019; Landis et al. 2021). 
-Moreover, because the underlying stochastic models are based on well-known probability distributions, parametric models can make use of statistical tests employed in phylogenetics for model choice, such as Likelihood Ratio Tests (LRT), the Akaike Information Criterion (AIC) or Bayes Factor comparisons.
-
+ 
 
 One popular parametric approach in biogeography is the continuous-time Markov Chain (CTMC) model, a parametric model with stochastic variables that are time-dependent. CTMC models are typically used to describe range evolution at the species level. A Markov chain is a stochastic, memory-less process that models transitions between discrete states over continuous or discrete-time; the probability of each transition event depends only on the state attained in the previous event.
 CTMC models are used in historical inference disciplines, such as molecular evolution (nucleotide substitution models), morphological evolution, or phylogenetic biogeography, where the states observed in the present are the result of a stochastic process that evolves over time. Stochastic means that, unlike in a deterministic process, the outcome of the process cannot be predicted with certainty, i.e., we cannot predict the result of evolution. At the same time, evolutionary processes are not entirely random or unpredictable: they can be described by probability distributions with parameters, whose values we infer from the data.
