@@ -7,8 +7,12 @@ In this tutorial, we are going to program a Bayesian inference biogeographic ana
 The Tutorial in RevBayes (website) presents an application of DEC to the silversword alliance, a clade of angiosperm plants that are endemic to Hawaii.
 The original description of the DEC model in Lagrange (Ree & Smith, 2008) also analyzed an island clade (Psychotria). But the first description of the model was on continental biogeography (Ree et al. 2005).
 
-We will work with a genus of beetles, Dendroctonus (Scolytidae), which feed on the conifers savia and are a serious agronomic pest on Europe and United States.
-A phylogeny for the genus was recently completed by Godofreid et al.2018. They are distributed across the Holarctic, in Europe, Asia and North America, and feed on a diverse array of conifers, including Picea (spruce), Pinus (pines), Tsuga, etc.
+We will work with a genus of beetles, **Dendroctonus** (Scolytidae), one of the most economically important conifer-feeding genus of bark beetles and a major pest (Six and Bracewell, 2015). The genus includes 20 species feeding under the bark of conifer species belonging to **Picea**, **Pinus**, **Larix** and **Pseudotsuga** groups (Armendáriz-Toledano et al., 2015). Most **Dendroctonus** species are native to North America, while two species naturally occur in Eurasia (**D. micans** and **D. armandi**). 
+It was traditionally considered that **Dendroctonus** originated in Mexico from species that fed on **Araucaria**. This hypothesis is supported by the high diversity of species occurring in Mexican mountain ranges (13 spp). Other studies (Zúñiga et al. 2002) claimed that the genus probably originated in the northern areas of North America. 
+Here, we will be using data from a recent phylogeny for the genus published by Godofreid et al. (2018) based on RAD-seq genomic data.
+
+![Figure2](figures/Figure2.png "Figure 2")*Dendroctonus, a genus of bark beetles (Scolytidae) that feeds on conifers.
+
 
 ## Data description and access
 
@@ -21,12 +25,12 @@ cp -p Dendroctonus-range.nex data/
 cp -p Dendroctonus.tre data/
 ```
 
-Take a look at the *Dendroctonus.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
+Take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
 
-Next, take look at the *Dendroctonus-range.nex*. It includes the distribution of 19 species and 2 outgroup taxa, encoded as presence-absence data. 
-Area coding follows Sanmartin et al. (2008), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia*, *Western Nearctic (WN)*: North America west of the Rocky Mountains*, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
+Next, take look at the *Dendroctonus.range.nex*. It includes the distribution of 19 species and 2 outgroup taxa, encoded as presence-absence data. 
+Area coding follows Sanmartin et al. (2008), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia*, *Western Nearctic (WN)*: North America west of the Rocky Mountains, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
 
-![Figure2](figures/Figure2.png "Figure 2")*Distribution range of Dendroctonus, showing the division of the Holarctic into four areas.
+![Figure3](figures/Figure3.png "Figure 3")*Distribution range of Dendroctonus, showing the division of the Holarctic into four areas.
 
 Because there are four discrete areas and we accept all possible combinations, the area ranges used in this exercise are 15 + the empty set (the species is absent from all areas).
 {% table table1 %}
@@ -52,7 +56,7 @@ Because there are four discrete areas and we accept all possible combinations, t
 ## Launching RevBayes
 Launch RevBayes by typing `./rb` if your are using the Terminal, or `rb-mpi` if you are using the parallel version in a cluster command line. This should launch RevBayes and give you a command prompt (the `>` character); this means RevBayes is waiting for input.
 
-## Constructing the DEC model *interactively*
+## Constructing the phylogenetic model *interactively*
 
 First, assign the tree and geographic range files (these are contained in your folder "data"; notice that you need to be one level above).
 Create a directory for the output file. We called it `output/simple`.
@@ -342,7 +346,7 @@ Ancestral state trees are annotated with the first three most probable ancestral
 with ancestral states before and after cladogenetic events. Notice that there are two types of ancestral states. `start_state_1` is the ancestral range with the highest posterior probability at the start of the branch; `start_state_1` is the ancestral range with the highest posterior probability at the start of the branch. In many cases, this is exactly the same, whereas in others it is not. Can you guess the reason for this? Check the posterior probability values for each possible ancestral state. Do you notice any different in PP values between the basal and the more distal node?
 
 
-![Figure3](figures/Figure3.png "Figure 3")*Tree with ancestral state estimates for the "simple" analysis. Nodes are annotated with ancestral states before and after cladogenetic events. The ancestral range with the highest posterior probability is shown. Colors of markers indicate the range state.
+![Figure4](figures/Figure4.png "Figure 4")*Tree with ancestral state estimates for the "simple" analysis. Nodes are annotated with the ancestral range with the highest posterior probability before the cladogenetic event. The ancestral range with the highest posterior probability; the posterior probability value is shown along the branch. 
 
 OBS: As with the initial run file, you can source the script, containing  all commands above.
 ```
@@ -397,8 +401,8 @@ Finally, it is possible to generate a figure with ancestral states that is suita
 I have included two R files: one to generate a figure with the cladogenetic (ancestral range) reconstructions:
 
 
-![Figure4](figures/Figure4.png "Figure 4")*Tree with ancestral ancestral ranges reconstructed for the nodes in the tree for the "simple" analysis. 
+![Figure5](figures/Figure5.png "Figure 5")*Tree with ancestral ancestral ranges reconstructed for the nodes in the tree for the "simple" analysis. 
 
 And a second script to generate a figure with the anagenetic (stochastic mapping) reconstructions:
 
-![Figure5](figures/Figure4.png "Figure 4")*Tree with events of biogeographic change plotted along the phylogeny for the "simple" analysis. 
+![Figure6](figures/Figure6.png "Figure 6")* a) Tree with events of biogeographic change plotted along the phylogeny for the "simple" analysis. b) Support for the anagenetic events as posterior probabilities.
