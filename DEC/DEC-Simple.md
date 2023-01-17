@@ -30,7 +30,7 @@ Take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular p
 Next, take look at the *Dendroctonus.range.nex*. It includes the distribution of 19 species and 2 outgroup taxa, encoded as presence-absence data. 
 Area coding follows Sanmartin et al. (2008), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia*, *Western Nearctic (WN)*: North America west of the Rocky Mountains, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
 
-![Figure3](figures/Figure3.png "Figure 3")*Distribution range of Dendroctonus, showing the division of the Holarctic into four areas.
+![Figure3](figures/Figure3.png "Figure 3")*Distribution range of Dendroctonus with four Holarctic regions.
 
 Because there are four discrete areas and we accept all possible combinations, the area ranges used in this exercise are 15 + the empty set (the species is absent from all areas).
 {% table table1 %}
