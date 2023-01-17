@@ -1,0 +1,117 @@
+# This file processes all datasets jointly. We assume each group has its own molecular model, but shares the biogeographic model.
+
+# We assume that all the molecular and the biogeographic data are in
+# a single file for each genus. The molecular data need to be in the 
+# first data matrix in each file, and the biogeographic data in the 
+# second data matrix. The biogeographic
+# states need to be the same across groups. 
+
+# Read in all molecular data matrices into the vector D
+# Read in all biogeographic matrices into the vector B
+# Also set age calibrations for each group
+
+filenames <- [  "Input/Bencomia.nex",
+                "Input/Bystropogon.nex",
+                "Input/Cistus.nex",
+                "Input/Crambe.nex",
+                "Input/Inulinae.nex",
+                "Input/Lotus.nex",
+                "Input/Micromeria.nex",
+                "Input/Pericallis.nex",
+                "Input/Teline.nex"
+              ]
+
+
+
+for ( i in 1:filenames.size() )
+{
+    X <- readDiscreteCharacterData( filenames[i] )
+
+    D[i] <- X[1]
+    B[i] <- X[2]
+}
+
+# Define the molecular model for each group
+mvi = 1
+
+
+for ( i in 1:D.size() )
+{
+    # Define priors for elements of rate matrix
+    pi_M[i] ~ dnDirichlet( v(1,1,1,1) )
+    r_M[i]  ~ dnDirichlet( v(1,1,1,1,1,1) )
+
+    # Define rate matrix
+    Q_M[i] := fnGTR( r_M[i], pi_M[i] )
+
+    # Clock rate: We use an exponential prior with expectation 1/1000=0.001
+    # because the dataset is made up of chloroplast markers, which are typically between  10E-4 and 10E-3.
+    
+    clockRate_M[i] ~ dnExponential( 1000.0 ) 
+
+    # Set tree prior parameters
+    
+# Set bd model priors
+ 
+    # Diversification prior
+    # The mean of the diversification prior corresponds to an expectation
+    # of 20 lineages in 3.0 Myr, i.e. exp(rT) = 20 when T = 3 and r = 1
+    
+    diversification ~ dnExponential( 1.0 )
+    turnover ~ dnUniform(0.000001,0.999999)
+
+# Convert to underlying parameters
+
+lambda := diversification / abs(1.0 - turnover)
+mu     := turnover * lambda
+
+    # # # Set the root age: anywhere from 0 to 20 Myr old
+    # Age of Canary Islands goes from 0.1 (El Hierro) to 20 Ma (Fuerteventura)
+    
+    rootAge[i] ~ dnUniform( 0.000001, 20.0 )
+    
+ # We define the complete tree model
+
+
+    tau[i] ~ dnBirthDeath(  lambda = lambda[i],
+                            mu = mu[i],
+                            rootAge = rootAge[i],
+                            rho = 1.0,
+                            samplingStrategy = "uniform",
+                            condition = "time",
+                            nTaxa = D[i].ntaxa(),
+                            names = D[i].names()
+                        )
+
+    alpha_M[i] ~ dnExponential(1.0)
+
+    probs <- v( 0.125, 0.375, 0.625, 0.875 )
+
+    for ( j in 1:4 )
+        siteRates_M[i][j] := qgamma( probs[j], alpha_M[i], alpha_M[i] )
+
+    seq_M[i] ~ dnPhyloCTMC( tree        = tau[i],
+                            Q           = Q_M[i],
+                            branchRates = clockRate_M[i],
+                            siteRates   = siteRates_M[i],
+                            nSites      = D[i].nchar(),
+                            type        = "DNA"
+                          )
+
+    seq_M[i].clamp( D[i] )
+    
+    # add moves
+    moves[ mvi++ ] = mvScale(clockRate_M[i],lambda=1,tune=true,weight=1)
+    moves[ mvi++ ] = mvScale(rootAge[i],lambda=1,tune=true,weight=1)
+    moves[ mvi++ ] = mvScale(diversification[i],lambda=1,tune=true,weight=1)
+    moves[ mvi++ ] = mvScale(turnover[i],lambda=1,tune=true,weight=1)
+    moves[ mvi++ ] = mvNNI(tau[i], weight=10.0)
+    moves[ mvi++ ] = mvFNPR(tau[i], weight=10.0)
+    moves[ mvi++ ] = mvSubtreeScale(tau[i], weight=5.0)
+    moves[ mvi++ ] = mvNodeTimeSlideUniform(tau[i], weight=10.0)
+    moves[ mvi ] = mvScale(alpha_M[i], lambda=1, tune=true, weight=1.0)
+    
+    
+}
+
+   
