@@ -406,3 +406,6 @@ I have included two R files: one to generate a figure with the cladogenetic (anc
 And a second script to generate a figure with the anagenetic (stochastic mapping) reconstructions:
 
 ![Figure6](figures/Figure6.png "Figure 6")* a) Tree with events of biogeographic change plotted along the phylogeny for the "simple" analysis. b) Support for the anagenetic events as posterior probabilities.
+
+
+
