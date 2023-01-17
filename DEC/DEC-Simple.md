@@ -11,7 +11,7 @@ We will work with a genus of beetles, **Dendroctonus** (Scolytidae), one of the 
 It was traditionally considered that **Dendroctonus** originated in Mexico from species that fed on **Araucaria**. This hypothesis is supported by the high diversity of species occurring in Mexican mountain ranges (13 spp). Other studies (Zúñiga et al. 2002) claimed that the genus probably originated in the northern areas of North America. 
 Here, we will be using data from a recent phylogeny for the genus published by Godofreid et al. (2018) based on RAD-seq genomic data.
 
-![Figure2](figures/Figure2.png "Figure 2")*Dendroctonus, a genus of bark beetles (Scolytidae) that feeds on conifers.
+![Figure2](figures/Figure2.jpg "Figure 2")*Dendroctonus, a genus of bark beetles (Scolytidae) that feeds on conifers.
 
 
 ## Data description and access
