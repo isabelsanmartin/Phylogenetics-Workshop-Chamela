@@ -1,0 +1,197 @@
+#!/usr/bin/rb
+
+# We will reconstruct the evolutionary history of the Dendroctonus, a genus of bark beetles (Scolytidae) that feeds on conifers, using the Dispersal-Extinction-Cladogenesis model implemented with Bayesian inference.
+
+# First, assign the tree and geographic range files (these are contained in your folder "data"; notice that you need to be one level above).
+# Create a directory for the output file
+
+
+# Filenames
+range_fn = "data/Dendroctonus.range.nex"
+tree_fn  = "data/Dendroctonus-tree.tre"
+out_fn   = "output/simple"
+
+# Read binary (01) presence-absence range data contained in "range_fn"
+dat_range_01 = readDiscreteCharacterData(range_fn)
+
+# Convert binary ranges into NaturalNumbers readable by the machine
+dat_range_n = formatDiscreteCharacterData(dat_range_01, "DEC")
+
+# Record the number of areas (characters) from the discrete data object
+n_areas  = dat_range_01.nchar()
+
+# Compare the two types of coding for Taxon [1] in Dendroctonus.range.nex, which is (Dendroctonus) **rizhofagus**
+# As human-readable presence-absence data: 1000
+dat_range_01[1]
+
+# And as machine-readable natural numbers:  1
+dat_range_n[1]
+
+
+# We record the correspondence between range states and range labels.
+# Store the vector of range state descriptions
+state_desc = dat_range_n.getStateDescriptions()
+
+# write the state descriptions to file
+state_desc_str = "state,range\n"
+for (i in 1:state_desc.size())
+{
+    state_desc_str += (i-1) + "," + state_desc[i] + "\n"
+}
+write(state_desc_str, file=out_fn+".state_labels.txt")
+
+### Create movements  movimientos for the MCMC and monitors, and set up the number of generations 
+moves = VectorMoves()
+monitors = VectorMonitors()
+n_gen = 3000
+
+###############
+# Tree models #
+###############
+
+# Read the tree. If there are more than one tree, we keep an index.
+tree <- readTrees(tree_fn)[1]
+
+
+#######################
+# Biogeography model #
+#######################
+
+#######################
+# 1. Anagenetic events #
+#######################
+
+# Set the biogeographic rate parameter. 
+# In order for anagenetic event rates to be measured on an absolute time scale (e.g., in millions of years)
+# we introduce a biogeographic rate parameter, similar to the molecular clock parameter used in dating analyses.
+
+# In the tutorial example, this is set to be quite broad or uninformative. "log10_range_bg" is set as a uniform distribution bounded 
+# between 0.0001 (10exp(-4)) and 100 (10exp(2)), with an initial value of 0.01 (10exp(-2)).
+
+
+log10_rate_bg ~ dnUniform(-4,2)
+log10_rate_bg.setValue(-2)
+moves[1] = mvSlide(log10_rate_bg, weight=4)
+
+# Then, convert the rate from log-scale to linear-scale with a deterministic node, and assign moves.
+# This yields a uniform prior over orders of magnitude, ranging from 10exp(−4) to 10exp(2) events per million years.
+
+rate_bg := 10^log10_rate_bg
+
+
+# Because the rate matrix will describe the relative anagenetic event rates, 
+# we can safely assume that dispersal occurs at the relative (fixed) rate of one.
+
+dispersal_rate <- 1.0
+
+# Build the relative dispersal rate matrix
+for (i in 1:n_areas) {
+    for (j in 1:n_areas) {
+        dr[i][j] <- dispersal_rate
+    }
+}
+
+### # Then, define the stochastic variable "relative extirpation rate" (or per-area extinction rates)
+
+log_sd <- 0.5
+log_mean <- ln(1) - 0.5*log_sd^2
+extirpation_rate ~ dnLognormal(mean=log_mean, sd=log_sd)
+moves.append( mvScale(extirpation_rate, weight=2) )
+
+# Build the relative extirpation rate matrix. Notice that er is a diagonal matrix where all elements except the diagonal are 0.0.
+# The diagonal elements are "determined" by the extirpation_rate random variable.
+
+for (i in 1:n_areas) {
+    for (j in 1:n_areas) {
+        er[i][j] <- 0.0       
+    }
+    er[i][i] := extirpation_rate
+}
+
+# Build the DEC Q rate matrix given the instantaneous rate of dispersal and extinction anagenetic events along branches.
+
+Q_DEC := fnDECRateMatrix(dispersalRates=dr,
+                         extirpationRates=er)
+                           
+
+
+#######################
+# Cladogenetic events #
+#######################                         
+                           
+# Build the matrix of cladogenetic transition probabilities. 
+# Notice this is not an instantaneous rate matrix but a matrix of transition probabilities because cladogenetic events are not defined as a CTMC.
+# Only sympatry (wide or peripatry, narrow) and allopatry (vicariance) are allowed.
+
+# We assign a flat fixed prior through a simplex (same weight for the two events)
+
+clado_event_types <- [ "s", "a" ]
+clado_event_probs <- simplex(1,1)
+
+# Another possibility is to assign a simplex that sums to 1, but the proportion of the prior for each event is different.
+# In that case, we need to define moves.
+
+p_sympatry ~ dnUniform(0,1)
+p_allopatry := abs(1.0 - p_sympatry)
+clado_type_probs := simplex(p_sympatry, p_allopatry)
+moves.append( mvSlide(p_sympatry, weight=2) )
+
+# The matrix of cladogenetic transition probabilities  
+P_DEC := fnDECCladoProbs(eventProbs=clado_event_probs,
+                         eventTypes=clado_event_types,
+                         numCharacters=n_areas)
+
+# We build the phylogenetic CTMC with cladogenetic events (anagenetic Q_DEC and cladogenetic P_DEC component).
+# The dnPhyloCTMCClado distribution is similar to dnPhyloCTMC except that it allows for cladogenetic events.
+m_bg ~ dnPhyloCTMCClado(tree=tree,
+                           Q=Q_DEC,
+                           cladoProbs=P_DEC,
+                           branchRates=rate_bg,
+                           type="NaturalNumbers",
+                           nSites=1)
+    
+# Attach the range data to the model (use the machine-readable encoding).
+
+m_bg.clamp(dat_range_n)
+
+############
+# Monitors #
+############
+
+
+monitors.append( mnScreen(printgen=100, rate_bg) )
+monitors.append( mnModel(file=out_fn+".model.log", printgen=1) )
+monitors.append( mnFile(tree, filename=out_fn+".tre", printgen=1) )
+
+# Cladogenetic events (nodal ancestral ranges) #
+monitors.append( mnJointConditionalAncestralState(tree=tree,
+                                                  ctmc=m_bg,
+                                                  type="NaturalNumbers",
+                                                  withTips=true,
+                                                  withStartStates=true,
+                                                  filename=out_fn+".states.log",
+                                                  printgen=1) )
+
+# Anagenetic events (transitions along branches)
+                                                 
+monitors.append( mnStochasticCharacterMap(ctmc=m_bg,
+                                          filename=out_fn+".stoch.log",
+                                          printgen=10) )
+
+############
+# Analysis #
+############
+
+# build the model analysis object from the model graph
+mymodel = model(m_bg)
+
+# create the MCMC analysis object
+mymcmc = mcmc(mymodel, monitors, moves)
+
+# run the MCMC analysis
+mymcmc.run(n_gen)
+
+# exit
+quit()
+# exit
+# quit()
