@@ -7,7 +7,7 @@ In this tutorial, we are going to program a Bayesian inference biogeographic ana
 We will work with a set of nine clades that are distributed in the Canary Islands, a volcanic archipelago located in the Atlantic Ocean, close to northwest Africa. 
 These clades (genera, tribes, "generic-alliances) differ in the number of species and taxonomically (they belong to different groups of organisms: e.g., insects, angiosperms, millipeda), and have different ecological preferences; however, they share a common distribution (even though not every clade is distributed in exactly the same set of islands). The Canary Islands were formed by the African plate moving over a "hotspot" (a permanent source of magma) in the Atlantic Ocean; unlike Hawaii, another hotspot archipelago, their volcanic history was also influenced by tectonics, i.e., a continental fracture propagating from the African Atlas mountain range. All islands were formed in the last 20 million years, with the eastern islands (Lanzarote, Fuerteventua) being the oldest, and the westernmost islands (La Palma, El Hierro), the youngest.
 
-![Figure1](figures/Figure1.jpg "Figure 1")*The Canary Islands are formed by seven major islands, with different sizes and ages. 
+![Figure1](figures/Figure1.png "Figure 1")*The Canary Islands are formed by seven major islands, with different sizes and ages. 
 
 ## Data description and access
 
