@@ -7,8 +7,8 @@ In this tutorial, we are going to program a Bayesian inference biogeographic ana
 The Tutorial in RevBayes (website) presents an application of DEC to the silversword alliance, a clade of angiosperm plants that are endemic to Hawaii.
 The original description of the DEC model in Lagrange (Ree & Smith, 2008) also analyzed an island clade (Psychotria). But the first description of the model was on continental biogeography (Ree et al. 2005).
 
-We will work with a genus of beetles, **Dendroctonus**, one of the most economically important conifer-feeding genus of bark beetles (Scolytidae) and a major pest (Six and Bracewell, 2015). The genus includes 20 species feeding under the bark of conifer species belonging to **Picea**, **Pinus**, **Larix** and **Pseudotsuga** groups (Armendáriz-Toledano et al., 2015). Most **Dendroctonus** species are native to North America, while two species naturally occur in Eurasia (**D. micans** and **D. armandi**). 
-It was traditionally considered that **Dendroctonus** originated in Mexico from species that fed on **Araucaria**. This hypothesis is supported by the high diversity of species occurring in Mexican mountain ranges (13 spp). Other studies (Zúñiga et al. 2002) claimed that the genus probably originated in the northern areas of North America. 
+We will work with a genus of beetles, **Dendroctonus**, one of the most economically important conifer-feeding genus of bark beetles (Scolytidae) and a major pest. The genus includes 20 species feeding under the bark of conifer species belonging to **Picea**, **Pinus**, **Larix** and **Pseudotsuga** groups. Most **Dendroctonus** species are native to North America, while two species naturally occur in Eurasia (**D. micans** and **D. armandi**). 
+It was traditionally considered that **Dendroctonus** originated in Mexico from species that fed on **Araucaria**. This hypothesis is supported by the high diversity of species occurring in Mexican mountain ranges (13 spp). Other studies suggested that the genus originated in the northern areas of North America. 
 Here, we will be using data from a recent phylogeny for the genus published by Godofreid et al. (2018) based on RAD-seq genomic data.
 
 ![Figure2](figures/Figure2.jpg "Figure 2")*Dendroctonus, a genus of bark beetles (Scolytidae) that feeds on conifers.
@@ -28,7 +28,7 @@ cp -p Dendroctonus.tre data/
 Take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
 
 Next, take look at the *Dendroctonus.range.nex*. It includes the distribution of 19 species and 2 outgroup taxa, encoded as presence-absence data. 
-Area coding follows Sanmartin et al. (2008), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia*, *Western Nearctic (WN)*: North America west of the Rocky Mountains, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
+Area coding follows Sanmartin et al. (2001), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia*, *Western Nearctic (WN)*: North America west of the Rocky Mountains, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
 
 ![Figure3](figures/Figure3.png "Figure 3")*Distribution range of Dendroctonus with four Holarctic regions.
 
@@ -401,11 +401,17 @@ Finally, it is possible to generate a figure with ancestral states that is suita
 I have included two R files: one to generate a figure with the cladogenetic (ancestral range) reconstructions:
 
 
-![Figure5](figures/Figure5.png "Figure 5")*Tree with ancestral ancestral ranges reconstructed for the nodes in the tree for the "simple" analysis. 
+![Figure5](figures/Figure5.png "Figure 5")*Tree with ancestral ancestral ranges reconstructed for the nodes in the tree for the "simple" analysis. TEE: Terminal Eocene Event. MMCO: Mid Miocene Climatic Optimum. LMC: Late Miocene Climate Cooling. BS: Bering Strait.
 
 And a second script to generate a figure with the anagenetic (stochastic mapping) reconstructions:
 
 ![Figure6](figures/Figure6.png "Figure 6")* a) Tree with events of biogeographic change plotted along the phylogeny for the "simple" analysis. b) Support for the anagenetic events as posterior probabilities.
+
+##References
+
+Godefroid, M., Meseguer, A. S., Sauné, L., Genson, G., Streito, J. C., Rossi, J. P., ... & Rasplus, J. Y. (2019). Restriction-site associated DNA markers provide new insights into the evolutionary history of the bark beetle genus Dendroctonus. Molecular phylogenetics and evolution, 106528.
+
+Sanmartin, I., Enghoff, H., Ronquist, F., 2001. Patterns of animal dispersal, vicariance and diversification in the Holarctic. Biol. J. Linn. Soc. 73, 345–390.
 
 
 
