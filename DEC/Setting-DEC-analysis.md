@@ -405,7 +405,7 @@ And a second script `Plotting_Stochastic_Mapping.R` to generate a figure with th
 2. Can you correlate any of the inferred biogeographic pattern/ancestral species distribution to a paleogeographic event?
 3. Did Dendroctonus follow the same diversification pattern that conifers, increasing diversification with climate cooling?
 
-## References
+## References 
 
 Godefroid, M., Meseguer, A. S., Sauné, L., Genson, G., Streito, J. C., Rossi, J. P., ... & Rasplus, J. Y. (2019). Restriction-site associated DNA markers provide new insights into the evolutionary history of the bark beetle genus Dendroctonus. Molecular phylogenetics and evolution, 106528.
 
