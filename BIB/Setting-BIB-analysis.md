@@ -19,7 +19,7 @@ There are two components on each dataset: the first matrix contains the DNA alig
 
 ![Figure2](figures/Figure2.png "Figure 2")*Data structure of a BIB model
 
-Area coding follows Sanmartin et al. (2008), and divides the Canary Islands into three "geological" groups of islands (islands that were formed in the same geological pulses over the last 20 million years: *Eastern Islands (1)*: Lanzarote (15 Ma) and Fuerteventura (20 Ma), *Central Islands (2)*: Gran Canaria (14 Ma), Tenerife (12 Ma) and Gomera (9 Ma), and *Western Islands (3)*: La Palma (2 Ma) and El Hierro (0.8 Ma). Finally, we will consider a fourth state to allow lineages to migrate into the Canary Islands, *Mainland (0)*: Iberian Peninsula, other Macaronesian archipelagos, Africa.
+Area coding follows Sanmartin et al. (2008), and divides the Canary Islands into three "geological" groups of islands (islands that were formed in the same geological pulses over the last 20 million years: *Eastern Islands (1)*: Lanzarote (15 Ma) and Fuerteventura (20 Ma), *Central Islands (2)*: Gran Canaria (14 Ma), Tenerife (12 Ma) and Gomera (10 Ma), and *Western Islands (3)*: La Palma (2 Ma) and El Hierro (0.8 Ma). Finally, we will consider a fourth state to allow lineages to migrate into the Canary Islands, *Mainland (0)*: Iberian Peninsula, other Macaronesian archipelagos, Africa.
 
 
 ## Launching RevBayes
