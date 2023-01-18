@@ -14,14 +14,14 @@ library(devtools)
 library(RevGadgets)
 
 # get state labels and state colors
-labs <- c("1"  = "K",   "2"  = "O", 
-          "3"  = "M",   "4"  = "H", 
-          "5"  = "KO",  "6"  = "KM", 
-          "7"  = "OM",  "8"  = "KH", 
-          "9"  = "OH",  "10" = "MH", 
-          "11" = "KOM", "12" = "KOH", 
-          "13" = "KMH", "14" = "OMH", 
-          "15" = "KOMH")
+labs <- c("1"  = "A",   "2"  = "B", 
+          "3"  = "C",   "4"  = "D", 
+          "5"  = "AB",  "6"  = "AC", 
+          "7"  = "BC",  "8"  = "AD", 
+          "9"  = "BD",  "10" = "CD", 
+          "11" = "ABC", "12" = "ABD", 
+          "13" = "ACD", "14" = "BCD", 
+          "15" = "ABCD")
 ancstates <- processAncStates(tree_fn, state_labels = labs)
 
 # plot the ancestral states
@@ -47,7 +47,7 @@ pp = pp + labs(x="Age (Ma)")
 pp = pp + coord_cartesian(xlim=c(x0,x1), expand=TRUE)
 
 # plot axis ticks
-island_axis = sec_axis(~ ., breaks=x_phy-c(5.1, 2.95, 1.55, 0.5), labels=c("+K","+O","+M","+H") )
+island_axis = sec_axis(~ ., breaks=x_phy-c(35.0, 17.0, 10.0, 3.5), labels=c("TEE","MMCO","LMC","BS") )
 x_breaks = seq(0,x_start,1) + x0
 x_labels = rev(seq(0,x_start,1))
 pp = pp + scale_x_continuous(breaks=x_breaks, labels=x_labels, sec.axis=island_axis)
