@@ -58,7 +58,7 @@ runName <- "biogeo_model"
 # Screen and model monitors
 
 monitors[mni++] = mnModel(    
-                                filename = output/runName + ".csv",
+                                filename = runName + ".csv",
                                 printgen = 10
                            )
 
