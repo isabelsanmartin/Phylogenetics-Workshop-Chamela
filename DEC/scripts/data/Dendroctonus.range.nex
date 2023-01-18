@@ -1,0 +1,29 @@
+#NEXUS
+[A = Western Nearctic, B=Eastern Nearctic, C=Western Palearctic, D=Eastern Palearctic]
+Begin data;
+Dimensions ntax=19 nchar=4;
+Format datatype=Standard missing=? gap=- labels="01";
+Matrix
+                                                    [ABCD]
+    	rhizophagus									1000
+		valens_usa									1100
+		terebrans									0100
+		mexicanus									1000
+		frontalis									1100
+		approximatus								1000
+		brevicomis									1000
+		adjunctus									1000
+		ponderosae									1000
+		jeffreyi									1000
+		rufipennis									1100
+		micans										0001
+		murrayanae									1000
+		punctatus									1100
+		pseudotsugae								1000
+		simplex										1100
+		armandi										0001
+		JRAS05561_0101_tomicus						0011
+		hylastes									1111                    
+    ;
+End;
+
