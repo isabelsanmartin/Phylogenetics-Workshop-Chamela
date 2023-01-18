@@ -10,4 +10,4 @@ Instructor Isabel Sanmartin
 
 ## To start with...
 
-Download the entire directory into your personal computer by clicking in the ´ Code ´ button, and ´Download zip ´
+Download the entire directory into your personal computer by clicking in the `Code` button, and `Download zip`
