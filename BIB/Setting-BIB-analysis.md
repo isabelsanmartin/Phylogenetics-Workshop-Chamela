@@ -178,7 +178,7 @@ We now use a loop to define the components of the biogeographic model for each c
 2. We create the model
 3. We add moves to the biogeographic part of the model assuming that the molecular evolution moves are already in the vector moves
 4. We set up the file and screen monitors
-5. 
+
 
 ```
 mvi = 1
