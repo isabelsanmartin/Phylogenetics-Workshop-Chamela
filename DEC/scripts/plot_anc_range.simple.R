@@ -8,10 +8,10 @@ label_fn = paste(fp, "output/simple.state_labels.txt", sep="")
 color_fn = paste(fp, "range_colors.n4.txt", sep="")
 
 #install.packages("devtools", dependencies=TRUE)
-library(devtools)
+#library(devtools)
 #install_github("GuangchuangYu/ggtree")
 #install_github("revbayes/RevGadgets")
-library(RevGadgets)
+#library(RevGadgets)
 
 # get state labels and state colors
 labs <- c("1"  = "A",   "2"  = "B", 
@@ -35,7 +35,7 @@ pp=plotAncStatesPie(t = ancstates,
 # get plot dimensions
 x_phy = max(pp$data$x)       # get height of tree
 x_label = 3.5                # choose space for tip labels
-x_start = 7                  # choose starting age (greater than x_phy)
+x_start = 45                  # choose starting age (greater than x_phy)
 x0 = -(x_start - x_phy)      # determine starting pos for xlim
 x1 = x_phy + x_label         # determine ending pos for xlim
 
@@ -55,5 +55,5 @@ pp = pp + scale_x_continuous(breaks=x_breaks, labels=x_labels, sec.axis=island_a
 pp
 
 # save 
-ggsave(file=plot_fn, plot=pp, device="pdf", height=7, width=10, useDingbats=F)
+ggsave(file=plot_fn, plot=pp, device="pdf", height=14, width=30, useDingbats=F)
 
