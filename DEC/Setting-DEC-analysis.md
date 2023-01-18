@@ -7,20 +7,19 @@ In this tutorial, we are going to program a Bayesian inference biogeographic ana
 The Tutorial in RevBayes (website) presents an application of DEC to the silversword alliance, a clade of angiosperm plants that are endemic to Hawaii.
 The original description of the DEC model in Lagrange (Ree & Smith, 2008) also analyzed an island clade (Psychotria). But the first description of the model was on continental biogeography (Ree et al. 2005).
 
-We will work with a genus of beetles, **Dendroctonus**, one of the most economically important conifer-feeding genus of bark beetles (Scolytidae) and a major pest. The genus includes 20 species feeding under the bark of conifer species belonging to **Picea**, **Pinus**, **Larix** and **Pseudotsuga** groups. Most **Dendroctonus** species are native to North America, while two species naturally occur in Eurasia (**D. micans** and **D. armandi**). 
+We will work with a genus of beetles, **Dendroctonus**, one of the most economically important conifer-feeding genus of bark beetles (Curculionidae) and a major pest. The genus includes 20 species feeding under the bark of conifer species belonging to **Picea**, **Pinus**, **Larix** and **Pseudotsuga** groups. Most **Dendroctonus** species are native to North America, while two species naturally occur in Eurasia (**D. micans** and **D. armandi**). 
 It was traditionally considered that **Dendroctonus** originated in Mexico from species that fed on **Araucaria**. This hypothesis is supported by the high diversity of species occurring in Mexican mountain ranges (13 spp). Other studies suggested that the genus originated in the northern areas of North America. 
 Here, we will be using data from a recent phylogeny for the genus published by Godofreid et al. (2018) based on RAD-seq genomic data.
 
 ![Figure2](figures/Figure2.jpg "Figure 2")*Dendroctonus, a genus of bark beetles (Scolytidae) that feeds on conifers.
 
 
-## Data description and access
+## Data description
 
-First, download the datasets and scripts needed to complete the task.
-Move into the `DEC` folder, where you can find all data files needed for the practice inside the folder `data`: *Dendroctonus-range.nex* and the *Dendroctonus.tre* . Download the folder and its contents into your computer. Next, dowload the folder `scripts`. Inside this folder, you can find all the scripts needed to perform the analyses.
+Move into the `DEC` folder, where you can find all data files needed for the practice inside the folder `data`: *Dendroctonus-range.nex* and the *Dendroctonus.tre* .
 
 
-Move into the `data` folder and take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
+Take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
 
 Next, take look at the *Dendroctonus.range.nex*. It includes the distribution of 19 species and 2 outgroup taxa, encoded as presence-absence data. 
 Area coding follows Sanmartin et al. (2001), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia, *Western Nearctic (WN)*: North America west of the Rocky Mountains, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
