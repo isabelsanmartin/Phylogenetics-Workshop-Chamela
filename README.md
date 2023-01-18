@@ -8,6 +8,6 @@ Instructor Isabel Sanmartin
 2) Ancestral range reconstruction for a single taxon: Biogeographic analysis with DEC
 3) Inferring dispersal patterns across taxa: Biogeographic analysis with BIB
 
-**To start with...
+## To start with...
 
 Download the entire directory into your personal computer by clicking in the ´ Code ´ button, and ´Download zip ´
