@@ -354,7 +354,7 @@ To complete our visualization of the biogeographic model, we are going to recons
 
 First we read the tree/s
 ```
-T = readTrees("simple.tre")[1]
+T = readTrees("data/Dendroctonus-tree.tre")[1]
 ```
 
 Next, we define the burnin (the number of samples to remove before reaching stationarity)
@@ -366,10 +366,6 @@ n_time_slices = 500
 We read in the sampled character histories
 ```
 anc_states_SCHM = readAncestralStateTrace("output/simple.stoch.log")
-```
-And summarize the stochastic character maps
-```
-SummarizeCharacterMaps(anc_states, T, file="output/events.csv", burnin=0.1)
 ```
 
 Make summary tree. We create two files: one of them `simple_marginal_character.tree` contains the marginal probabilities for the anagenetic events. The second, `simple_marginal_posterior.tree` gives the support for those events.
