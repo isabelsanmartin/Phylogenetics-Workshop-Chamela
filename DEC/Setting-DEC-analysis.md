@@ -385,7 +385,7 @@ q()
 ## Plotting nice figures
 Finally, it is possible to generate a figure with ancestral states that is suitable for publication using the `R` package [RevGadgets] ("https://github.com/revbayes/RevGadgets")
 
-I have included two R files: one to generate a figure with the cladogenetic (ancestral range) reconstructions `plot_anc_range.simple.R`. Notice this R function calls a second R function `plot_anc_range.util.R included within the `scripts`folder
+I have included two R files: one to generate a figure with the cladogenetic (ancestral range) reconstructions `plot_anc_range.simple.R`. Notice this R function calls a second R function `plot_anc_range.util.R` included within the `scripts` folder
 
 
 ![Figure5](figures/Figure5.png "Figure 5")*Tree with ancestral ancestral ranges reconstructed for the nodes in the tree for the "simple" analysis. TEE: Terminal Eocene Event. MMCO: Mid Miocene Climatic Optimum. LMC: Late Miocene Climate Cooling. BS: Bering Strait.
