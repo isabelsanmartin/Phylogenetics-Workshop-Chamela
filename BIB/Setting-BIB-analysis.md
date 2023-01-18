@@ -58,6 +58,7 @@ for ( i in 1:filenames.size() )
     B[i] <- X[2]
 }
 ```
+### Building the molecular model for each clade
 
 Next, we define the molecular model for each group. We do it in a loop with four steps:
 
@@ -153,13 +154,94 @@ for ( i in 1:D.size() )
 }
 ```
 
-## Run the analysis
+### Building the common biogeographic model shared by all clades 
 
-First, we run the molecular model
+We assume following state codes (0-offset in Nexus file, 1-offset here)
+0 1 Eastern Islands (Fuerteventura, Lanzarote)
+1 2 Central Islands (Tenerife, Gran Canaria, Gomera)
+2 3 Western Islands (El Hierro, La Palma)
+3 4 Mainland
+
+We first define the island carrying capacities and biotic exchange intensities
+```
+pi_bio ~ dnDirichlet( v(1,1,1,1) )
+r_bio  ~ dnDirichlet( v(1,1,1,1,1,1) )
+```
+
+Next, we build  the biogeographic rate matrix, which is a deterministic node, a function of two parameters (r and pi)
+```
+Q_bio := fnGTR( r_bio, pi_bio )
+```
+
+We define the migration rate in units of time; the prior is derived assuming an expected rate of 1.0 island switches/Myr. We want a fairly vague prior because the uncertainty is considerable. Here we use a gamma(1,1)=exp(1) prior. It has 50 % credible set (0.29,1.39) and 95 % set (0.025,3.69).
+```
+mvi = 1
+mni = 1
+
+
+for ( i in 1:B.size() ) {
+
+migrationRates[i] ~ dnGamma( 1.0, 1.0 )
+
+    # Biogeography model, assuming that tau is in time units
+    bio[i] ~ dnPhyloCTMC(   tree            = tau[i],
+                            Q               = Q_bio,
+                            rootFrequencies = pi_bio,
+                            branchRates     = migrationRates[i],
+                            nSites          = 1,
+                            type            = "Standard"
+                        )
+
+    bio[i].clamp( B[i] )
+```
+
+We create the model
+```
+mymodel = model( bio )
+```
+
+We add moves to the biogeographic part of the model assuming that the molecular evolution moves are already in the vector moves
+```
+moves[ mvi++ ] = mvSimplexElementScale(pi_bio, alpha=10.0, tune=true, weight=4.0)
+moves[ mvi++ ] = mvSimplexElementScale(r_bio, alpha=10.0, tune=true, weight=6.0)
+moves[ mvi] = mvScale(migrationRates[i],lambda=1,tune=true,weight=1)
+```
+We set up the file and screen monitors
+```
+runName <- "biogeo_model"
+```
+
+
+Screen and file monitors
+```
+monitors[mni++] = mnModel(    
+                                filename = runName + ".csv",
+                                printgen = 10
+                           )
+
+monitors[mni++] = mnScreen(   
+                                printgen = 10,
+                                pi_bio,
+                                r_bio,
+                                migrationRates,
+                                posterior = true,
+                                likelihood = true,
+                                prior = true
+                            )
+```                       
+
+Finally, we run the analysis
+```                        
+mymcmc = mcmc( mymodel, monitors, moves )
+mymcmc.run( generations=100000 )
+
+## Run the analysis non interactively (from source)
+
+First, we run the molecular model. This script will set up the molecular model we described above.
 ```
 source("Molecular_model.Rev")
 ```
-Second, we run the biogeographic model
+Second, we run the biogeographic model. This script will set up the biogeographic model we described above, and run the analysis.
 ```
 source("biogeo_model.Rev")
 ```
