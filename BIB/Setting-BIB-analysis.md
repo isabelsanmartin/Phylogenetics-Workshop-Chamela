@@ -152,5 +152,17 @@ for ( i in 1:D.size() )
     
     
 }
+```
 
-   
+## Run the analysis
+
+First, we run the molecular model
+```
+source("Molecular_model.Rev")
+```
+Second, we run the biogeographic model
+```
+source("biogeo_model.Rev")
+```
+
+
