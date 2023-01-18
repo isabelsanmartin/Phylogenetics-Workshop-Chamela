@@ -1,6 +1,7 @@
 # libraries
 library(RevGadgets)
 library(ggplot2)
+library(ggtree)
 
 # functions
 add_island_times = function(p, x_offset) {
