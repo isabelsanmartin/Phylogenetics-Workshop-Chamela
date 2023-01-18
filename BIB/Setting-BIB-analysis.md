@@ -164,5 +164,6 @@ Second, we run the biogeographic model
 ```
 source("biogeo_model.Rev")
 ```
-
+## Visualize the results
+Open Tracer and visualize the results
 
