@@ -50,7 +50,7 @@ Because there are four discrete areas and we accept all possible combinations, t
 ## Launching RevBayes
 Launch RevBayes by typing `./rb` if your are using the Terminal, or `rb-mpi` if you are using the parallel version in a cluster command line. This should launch RevBayes and give you a command prompt (the `>` character); this means RevBayes is waiting for input.
 
-## Constructing the phylogenetic model *interactively*
+## Constructing the DEC model *interactively*
 
 First, assign the tree and geographic range files (these are contained in your folder "data"; notice that you need to be one level above).
 Create a directory for the output file. We called it `output/simple`.
@@ -78,6 +78,7 @@ Record the number of areas (characters) from the discrete data object
 n_areas  = dat_range_01.nchar()
 ```
 Compare the two types of coding for Taxon [1]: **Dendroctonus picea**
+
 As human-readable presence-absence data: 0010
 ```
 dat_range_01[1]
