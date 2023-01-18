@@ -57,8 +57,8 @@ Create a directory for the output file. We called it `output/simple`.
 
 ```
 
-range_fn = "data/silversword.n4.range.nex"
-tree_fn  = "data/silversword.tre"
+range_fn = "data/Dendroctonus.range.nex"
+tree_fn  = "data/Dendroctonus-tree.tre"
 out_fn   = "output/simple"
 ```
 
