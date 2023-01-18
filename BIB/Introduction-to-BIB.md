@@ -11,7 +11,6 @@ The BIB model uses MCMC Bayesian Inference to estimate ancestral ranges and rate
 
 Though they both use CTMC processes to model range evolution, BIB and DEC models are slightly different (Figure 1). BIB (Fig. 1a) implements a simpler character evolutionary model, in which ancestors can only occupy single areas (A or B) and range evolution along the branches if governed by a CTMC process with only one type of parameter equivalent to range switching or instantaneous dispersal; the Q matrix describes the instantaneous transition from one area as a jump dispersal event (p = A to B). At the speciation events in the phylogeny, the single-area ancestral range is inherited entirely and identically by the two descendants, in other words, there is no need to include a cladogenetic component in the BIB model because the ancestral range is not altered through speciation (Fig. 5a). 
 
-
 ![Figure0](figures/Figure0.png "Figure 0")*Parametric CTMC models in biogeographic inference. a. Standard CTMC model (BIB). b. Dispersal-Extinction Cladogenesis model (DEC)*
 
 
