@@ -197,15 +197,6 @@ clado_event_types <- [ "s", "a"]
 clado_event_probs <- simplex(1,1)
 ```
 
-Another possibility is to assign a simplex that sums to 1, but the proportion of the prior for each event is different.
-In that case, we need to define moves.
-```
-p_sympatry ~ dnUniform(0,1)
-p_allopatry := abs(1.0 - p_sympatry)
-clado_type_probs := simplex(p_sympatry, p_allopatry)
-moves.append( mvSlide(p_sympatry, weight=2) ) 
-```
-
 Next, we build the matrix of cladogenetic transition probabilities
 ```
 P_DEC := fnDECCladoProbs(eventProbs=clado_event_probs,
@@ -301,21 +292,21 @@ We are going to reconstruct the marginal distributions of the ancestral states f
 
 First, we open a new session in RevBayes, and assign some helper variables to the files we are going to work with:  
 ```
+out_str = "output/simple"
+
 out_state_fn = out_str + ".states.log"
-out_tree_fn = out_str + ".tre"
-out_mcc_fn = out_str + ".mcc.tre" 
+
+out_phy_fn   = out_str + ".tre"
+out_mcc_fn   = out_str + ".mcc.tre" 
 ```
 Next, we build a maximum clade credibility tree from the posterior tree distribution, discarding the first 25% of samples. (Note, this step is
 gratuitous when we assume a fixed phylogeny, but essential when we estimate the phylogeny).
 ```
-tree_trace = readTreeTrace(file=out_tree_fn, treetype="clock")
+tree_trace = readTreeTrace(file=out_phy_fn, treetype="clock")
 tree_trace.setBurnin(0.25)
-n_burn = tree_trace.getBurnin()
+mcc_tree = mccTree(tree_trace, file=out_mcc_fn, mean=false)
 ```
-We compute and save the maximum clade credibility tree
-```
-mcc_tree = mccTree(tree_trace, file=out_mcc_fn)
-```
+
 Get the ancestral state trace from simple.states.log
 ```
 state_trace = readAncestralStateTrace(file=out_state_fn)
@@ -323,9 +314,14 @@ state_trace = readAncestralStateTrace(file=out_state_fn)
 Get the ancestral state tree trace from simple.tre. It is important to use `readAncestralStateTreeTrace` and not `readTreeTrace`, as in the phylogenetic exercises to properly annotate the tree with ancestral states.
 ```
 
-tree_trace = readAncestralStateTreeTrace(file=out_tree_fn, treetype="clock")
+state_tree_trace = readAncestralStateTreeTrace(file=out_phy_fn, treetype="clock")
 ```
-Finally, compute and save the ancestral state tree as `simple.ase.tre`.
+
+Next, we apply the burnin to use only those values when the MCMC has reached stationarity
+```
+n_burn = floor(0.25 * state_tree_trace.getNumberSamples())
+```
+Finally, we estimate the ancestral state tree "simple.ase.tre"
 ```
 anc_tree = ancestralStateTree(tree=mcc_tree,
                               ancestral_state_trace_vector=state_trace,
