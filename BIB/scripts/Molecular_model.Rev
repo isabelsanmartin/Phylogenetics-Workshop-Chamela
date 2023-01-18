@@ -10,15 +10,15 @@
 # Read in all biogeographic matrices into the vector B
 # Also set age calibrations for each group
 
-filenames <- [  "Input/Bencomia.nex",
-                "Input/Bystropogon.nex",
-                "Input/Cistus.nex",
-                "Input/Crambe.nex",
-                "Input/Inulinae.nex",
-                "Input/Lotus.nex",
-                "Input/Micromeria.nex",
-                "Input/Pericallis.nex",
-                "Input/Teline.nex"
+filenames <- [  "data/Bencomia.nex",
+                "data/Bystropogon.nex",
+                "data/Cistus.nex",
+                "data/Crambe.nex",
+                "data/Inulinae.nex",
+                "data/Lotus.nex",
+                "data/Micromeria.nex",
+                "data/Pericallis.nex",
+                "data/Teline.nex"
               ]
 
 
