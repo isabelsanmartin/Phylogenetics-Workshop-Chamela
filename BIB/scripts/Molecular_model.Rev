@@ -79,8 +79,7 @@ mu[i]     := turnover[i] * lambda[i]
                             rho = 1.0,
                             samplingStrategy = "uniform",
                             condition = "time",
-                            nTaxa = D[i].ntaxa(),
-                            names = D[i].names()
+                            taxa = D[i].taxa()
                         )
 
     alpha_M[i] ~ dnExponential(1.0)
