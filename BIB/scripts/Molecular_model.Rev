@@ -62,7 +62,7 @@ for ( i in 1:D.size() )
 
 # Convert to underlying parameters
 
-lambda[i] := diversification[i] / abs(1.0 - turnover)
+lambda[i] := diversification[i] / abs(1.0 - turnover[i)
 mu[i]     := turnover[i] * lambda[i]
 
     # # # Set the root age: anywhere from 0 to 20 Myr old
