@@ -10,14 +10,14 @@
 # Read in all biogeographic matrices into the vector B
 # Also set age calibrations for each group
 
-filenames <- [  "data/Bencomia.nex",
-                "data/Bystropogon.nex",
-                "data/Cistus.nex",
-                "data/Crambe.nex",
-                "data/Inulinae.nex",
+filenames <- [  "data/Bystropogon.nex",
+                "data/Calathus.nex",
+                "data/Dolichoiulus.nex",
                 "data/Lotus.nex",
                 "data/Micromeria.nex",
-                "data/Pericallis.nex",
+                "data/Lotus.nex",
+                "data/Pimelia.nex",
+                "data/Psyllids.nex",
                 "data/Tolpis.nex"
               ]
 
@@ -57,13 +57,13 @@ for ( i in 1:D.size() )
     # The mean of the diversification prior corresponds to an expectation
     # of 20 lineages in 3.0 Myr, i.e. exp(rT) = 20 when T = 3 and r = 1
     
-    diversification ~ dnExponential( 1.0 )
-    turnover ~ dnUniform(0.000001,0.999999)
+    diversification[i] ~ dnExponential( 1.0 )
+    turnover[i] ~ dnUniform(0.000001,0.999999)
 
 # Convert to underlying parameters
 
-lambda := diversification / abs(1.0 - turnover)
-mu     := turnover * lambda
+lambda[i] := diversification[i] / abs(1.0 - turnover)
+mu[i]     := turnover[i] * lambda[i]
 
     # # # Set the root age: anywhere from 0 to 20 Myr old
     # Age of Canary Islands goes from 0.1 (El Hierro) to 20 Ma (Fuerteventura)
