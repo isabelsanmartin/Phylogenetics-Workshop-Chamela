@@ -43,7 +43,7 @@ filenames <- [  "Input/Bystropogon.nex",
                 "Input/Micromeria.nex",
                 "Input/Lotus.nex",
                 "Input/Pimelia.nex",
-                "Input/Psyllids.nex",
+                "Input/Psyllids.nex"
               ]
 ```
 
