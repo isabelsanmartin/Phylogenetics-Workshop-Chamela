@@ -12,7 +12,7 @@ These clades (genera, tribes, "generic-alliances) differ in the number of specie
 ## Data description and access
 
 First, download the datasets and scripts needed to complete the task.
-Move into the `BIB` folder, where you can find all scripts and files needed for the practice.  Inside this folder, you will find a second folder called `data`. Copy the contents of this file into your computer: it contains the datasets of the nine clades, e.g., *Inulinae.nex* .
+Move into the `BIB` folder, where you can find all scripts and files needed for the practice.  Inside this folder, you will find a second folder called `data`. Copy the contents of this file into your computer: it contains the datasets of the seven clades, e.g., *Bystropogon.nex* .
 
 Take a look at each of these datasets. You will note that unlike DEC, BIB works with raw DNA sequence alignment. This means that we will be inferring the phylogeny, the evolutionary relationships between species, jointly with patterns and rates of range evolution. 
 There are two components on each dataset: the first matrix contains the DNA alignment and the character states are the nucleotides (e.g., A, C, T, G). The second matrix contains the biogeographic states: only one column with each species (or DNA sequence voucher) coded by distribution.
@@ -44,7 +44,6 @@ filenames <- [  "Input/Bystropogon.nex",
                 "Input/Lotus.nex",
                 "Input/Pimelia.nex",
                 "Input/Psyllids.nex",
-                "Input/Tolpis.nex"
               ]
 ```
 
