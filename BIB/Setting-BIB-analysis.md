@@ -246,5 +246,10 @@ Second, we run the biogeographic model. This script will set up the biogeographi
 source("biogeo_model.Rev")
 ```
 ## Visualize the results
-Open Tracer and visualize the results
+Open Tracer to visualize the results and summarize the posterior probabilities for the parameters in the biogeographic model: dispersal rates between island groups and the mainland, and carrying capacities for each island-group.
+
+## Questions
+1. Can you find any general pattern in your results that you can connect to the paleogeography of this archipelago?
+2. Are there correlations between the biogeographic patterns and abiotic factors such as area size or geographic distance? (Hint: Compare your results with Figure 1.
+3. In this exercise, we have a mixed dataset with groups from different taxonomic groups. Do you think this is a good idea? How would you improve the analysis?
 
