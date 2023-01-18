@@ -79,11 +79,11 @@ n_areas  = dat_range_01.nchar()
 ```
 Compare the two types of coding for Taxon [1]: **Dendroctonus picea**
 
-As human-readable presence-absence data: 0010
+As human-readable presence-absence data: 1000
 ```
 dat_range_01[1]
 ```
-And as machine-readable natural numbers:  3
+And as machine-readable natural numbers:  1
 ```
 dat_range_n[1]
 ```
