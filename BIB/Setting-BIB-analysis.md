@@ -36,15 +36,15 @@ Read in all molecular data matrices into the vector D
 Read in all biogeographic matrices into the vector B
 ```
 
-filenames <- [  "Input/Bencomia.nex",
-                "Input/Bystropogon.nex",
-                "Input/Cistus.nex",
-                "Input/Crambe.nex",
-                "Input/Inulinae.nex",
+filenames <- [  "Input/Bystropogon.nex",
+                "Input/Calathus.nex",
+                "Input/Dolichoiulus.nex",
                 "Input/Lotus.nex",
                 "Input/Micromeria.nex",
-                "Input/Pericallis.nex",
-                "Input/Teline.nex"
+                "Input/Lotus.nex",
+                "Input/Pimelia.nex",
+                "Input/Psyllids.nex",
+                "Input/Tolpis.nex"
               ]
 ```
 
