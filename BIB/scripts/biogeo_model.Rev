@@ -1,0 +1,88 @@
+# Setting the BIB biogeographic model shared by all clades 
+
+# We assume following state codes (0-offset in Nexus file, 1-offset here)
+# 0 1 Eastern Islands (Fuerteventura, Lanzarote)
+# 1 2 Central Islands (Tenerife, Gran Canaria, Gomera)
+# 2 3 Western Islands (El Hierro, La Palma)
+# 3 4 Mainland
+
+# Define the island carrying capacities and biotic exchange intensities
+pi_bio ~ dnDirichlet( v(1,1,1,1) )
+r_bio  ~ dnDirichlet( v(1,1,1,1,1,1) )
+
+# Define thes biogeographic rate matrix
+Q_bio := fnGTR( r_bio, pi_bio )
+
+
+# Migration rate is defined in units of time; prior is derived
+# assuming an expected rate of 1.0 island switches/Myr. We want
+# a fairly vague prior because the uncertainty is considerable.
+# Here we use a gamma(1,1)=exp(1) prior. It has 50 % credible
+# set (0.29,1.39) and 95 % set (0.025,3.69).
+
+mvi = 1
+mni = 1
+
+for ( i in 1:B.size() ) {
+
+migrationRates[i] ~ dnGamma( 1.0, 1.0 )
+
+    # Biogeography model, assuming that tau is in time units
+    bio[i] ~ dnPhyloCTMC(   tree            = tau[i],
+                            Q               = Q_bio,
+                            rootFrequencies = pi_bio,
+                            branchRates     = migrationRates[i],
+                            nSites          = 1,
+                            type            = "Standard"
+                        )
+
+    bio[i].clamp( B[i] )
+
+# Make the model
+mymodel = model( bio[1] )
+
+# Add moves for the biogeography part of the model
+# assuming that the molecular evolution moves are already
+# in the vector moves
+moves[ mvi++ ] = mvSimplexElementScale(pi_bio, alpha=10.0, tune=true, weight=4.0)
+moves[ mvi++ ] = mvSimplexElementScale(r_bio, alpha=10.0, tune=true, weight=6.0)
+moves[mvi ] = mvScale(migrationRates[i],lambda=1,tune=true,weight=1)
+
+}
+
+# Set up tree, model and screen monitors
+runName <- "biogeo_model"
+
+
+
+# Screen and model monitors
+
+monitors[mni++] = mnModel(    
+                                filename = output/runName + ".csv",
+                                printgen = 10
+                           )
+
+monitors[mni++] = mnScreen(   
+                                printgen = 10,
+                                pi_bio,
+                                r_bio,
+                                migrationRates,
+                                posterior = true,
+                                likelihood = true,
+                                prior = true
+                            )
+                            
+# Tree monitors
+
+    #fileName <- runName + ".tau" + ".tre"
+
+#monitors = mnExtNewick(  tau,
+                                #posterior = false,
+                                #likelihood = false,
+                                #prior = false,
+                                #filename = fileName,
+                                #printgen = 10
+                             #)
+                             
+mymcmc = mcmc( mymodel, monitors, moves )
+mymcmc.run( generations=100000 )
