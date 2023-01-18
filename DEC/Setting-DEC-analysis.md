@@ -17,15 +17,10 @@ Here, we will be using data from a recent phylogeny for the genus published by G
 ## Data description and access
 
 First, download the datasets and scripts needed to complete the task.
-Move into the `DEC` folder, where you can find all scripts and files needed for the practice.  Inside this folder, create a second folder and name it `data`. Copy the *Dendroctonus-range.nex* and the *Dendroctonus.tre* 
+Move into the `DEC` folder, where you can find all data files needed for the practice inside the folder `data`: *Dendroctonus-range.nex* and the *Dendroctonus.tre* . Download the folder and its contents into your computer. Next, dowload the folder `scripts`. Inside this folder, you can find all the scripts needed to perform the analyses.
 
-```
-mkdir data
-cp -p Dendroctonus-range.nex data/
-cp -p Dendroctonus.tre data/
-```
 
-Take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
+Move into the `data` folder and take a look at the *Dendroctonus-tree.tre* file. It contains a dated molecular phylogeny of the genus, with branches measured in units of time, as million years (Mya). 
 
 Next, take look at the *Dendroctonus.range.nex*. It includes the distribution of 19 species and 2 outgroup taxa, encoded as presence-absence data. 
 Area coding follows Sanmartin et al. (2001), and divides the Holarctic landmasses into four continental cratons (landmasses that remained emerged for the last 65 Mya and which are separated by biogeographic barriers): *Western Palearctic (WP)*: Eurasia west of the Ural Mountains, equivalent to Europe), *Eastern Palearctic (EP)*: Eurasia east of the Ural Mountains: Asia*, *Western Nearctic (WN)*: North America west of the Rocky Mountains, and *Eastern Nearctic (EN)*: North America east of the Rocky Mountains. These four landmasses were connected at different times in the past: for example, Eastern North America and Europe were connected across a narrow Atlantic via landbridges between 55 and 20 Mya; Western North America and Asia remained connected even longer, up to the opening of the Bering Strait in the Mid Pliocene (3.5 Mya).
