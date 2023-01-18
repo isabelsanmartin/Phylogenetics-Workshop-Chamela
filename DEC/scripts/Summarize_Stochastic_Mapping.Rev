@@ -10,8 +10,6 @@ n_time_slices = 500
 # read in the sampled character histories
 anc_states_SCHM = readAncestralStateTrace("output/simple.stoch.log")
 
-#summarizeCharacterMaps(anc_states, T, file="output/events.csv", burnin=0.1)
-
 
  #make summary tree
 char_map_tree = characterMapTree(tree=T, 
