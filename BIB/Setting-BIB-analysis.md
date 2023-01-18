@@ -173,7 +173,13 @@ Next, we build  the biogeographic rate matrix, which is a deterministic node, a 
 Q_bio := fnGTR( r_bio, pi_bio )
 ```
 
-We define the migration rate in units of time; the prior is derived assuming an expected rate of 1.0 island switches/Myr. We want a fairly vague prior because the uncertainty is considerable. Here we use a gamma(1,1)=exp(1) prior. It has 50 % credible set (0.29,1.39) and 95 % set (0.025,3.69).
+We now use a loop to define the components of the biogeographic model for each clade.
+1. We first define the migration rate in units of time; the prior is derived assuming an expected rate of 1.0 island switches/Myr. We want a fairly vague prior because the uncertainty is considerable. Here we use a gamma(1,1)=exp(1) prior. It has 50 % credible set (0.29,1.39) and 95 % set (0.025,3.69).
+2. We create the model
+3. We add moves to the biogeographic part of the model assuming that the molecular evolution moves are already in the vector moves
+4. We set up the file and screen monitors
+5. 
+
 ```
 mvi = 1
 mni = 1
@@ -193,27 +199,19 @@ migrationRates[i] ~ dnGamma( 1.0, 1.0 )
                         )
 
     bio[i].clamp( B[i] )
-```
 
-We create the model
-```
+
 mymodel = model( bio )
-```
 
-We add moves to the biogeographic part of the model assuming that the molecular evolution moves are already in the vector moves
-```
+
 moves[ mvi++ ] = mvSimplexElementScale(pi_bio, alpha=10.0, tune=true, weight=4.0)
 moves[ mvi++ ] = mvSimplexElementScale(r_bio, alpha=10.0, tune=true, weight=6.0)
 moves[ mvi] = mvScale(migrationRates[i],lambda=1,tune=true,weight=1)
-```
-We set up the file and screen monitors
-```
+
+
 runName <- "biogeo_model"
-```
 
 
-Screen and file monitors
-```
 monitors[mni++] = mnModel(    
                                 filename = runName + ".csv",
                                 printgen = 10
@@ -228,12 +226,14 @@ monitors[mni++] = mnScreen(
                                 likelihood = true,
                                 prior = true
                             )
-```                       
+}                       
+```
 
 Finally, we run the analysis
 ```                        
 mymcmc = mcmc( mymodel, monitors, moves )
 mymcmc.run( generations=100000 )
+```
 
 ## Run the analysis non interactively (from source)
 
