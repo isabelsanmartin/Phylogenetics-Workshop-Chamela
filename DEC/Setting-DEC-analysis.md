@@ -401,8 +401,9 @@ And a second script `Plotting_Stochastic_Mapping.R` to generate a figure with th
 
 ## Questions
 
-What is the area of origin of Dendroctonus and how has it reached its current distribution?  
-Did Dendroctonus follow the same diversification pattern that conifers, increasing diversification with climate cooling?
+1. What is the area of origin of Dendroctonus and how did it reach its current disjunct distribution?
+2. Can you correlate any of the inferred biogeographic pattern/ancestral species distribution to a paleogeographic event?
+3. Did Dendroctonus follow the same diversification pattern that conifers, increasing diversification with climate cooling?
 
 ## References
 
