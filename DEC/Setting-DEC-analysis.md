@@ -399,6 +399,11 @@ And a second script `Plotting_Stochastic_Mapping.R` to generate a figure with th
 
 ![Figure6](figures/Figure6.png "Figure 6")* a) Tree with events of biogeographic change plotted along the phylogeny for the "simple" analysis. b) Support for the anagenetic events as posterior probabilities.
 
+## Questions
+
+What is the area of origin of Dendroctonus and how has it reached its current distribution?  
+Did Dendroctonus follow the same diversification pattern that conifers, increasing diversification with climate cooling?
+
 ## References
 
 Godefroid, M., Meseguer, A. S., Sauné, L., Genson, G., Streito, J. C., Rossi, J. P., ... & Rasplus, J. Y. (2019). Restriction-site associated DNA markers provide new insights into the evolutionary history of the bark beetle genus Dendroctonus. Molecular phylogenetics and evolution, 106528.
