@@ -155,7 +155,7 @@ for ( i in 1:D.size() )
 
 ### Building the common biogeographic model shared by all clades 
 
-We assume following state codes (0-offset in Nexus file, 1-offset here)
+We assume the following state codes (0-offset in Nexus file, 1-offset here)
 0 1 Eastern Islands (Fuerteventura, Lanzarote)
 1 2 Central Islands (Tenerife, Gran Canaria, Gomera)
 2 3 Western Islands (El Hierro, La Palma)
@@ -245,10 +245,10 @@ Second, we run the biogeographic model. This script will set up the biogeographi
 source("biogeo_model.Rev")
 ```
 ## Visualize the results
-Open Tracer to visualize the results and summarize the posterior probabilities for the parameters in the biogeographic model: dispersal rates between island groups and the mainland, and carrying capacities for each island-group.
+Open Tracer to visualize the results and summarize the posterior probabilities for the parameters in the biogeographic model: dispersal rates between the island groups, and between these and the mainland, and the carrying capacities for each island-group and the Mainland. Assess the behaviour of the MCMC by checking for stationarity (after the burnin) and appropriate ESS values (> 200). Compare the posterior probabililies of the six rates and the four stationary frequencies (you can use the "marginal density" button or the "estimates" button. OBS: Here, p1 is p for the Eastern Islands, p2, the Central Islands, p3, the Western Islands, and p4, the Mainland. The rates are numbered by their position in the Q matrix: r1 (EI <> CI), r2 (EI <> WI), r3 (EI <> M), r4 (CI <> WI), r5 (CI <> M), r6 (WI <> M).
 
 ## Questions
 1. Can you find any general pattern in your results that you can connect to the paleogeography of this archipelago?
-2. Are there correlations between the biogeographic patterns and abiotic factors such as area size or geographic distance? (Hint: Compare your results with Figure 1.
+2. Do you observe any correlations between the biogeographic patterns and abiotic factors such as island size or geographic distance between islands? (Hint: Compare your estimates with Figure 1).
 3. In this exercise, we have a mixed dataset with groups from different taxonomic groups. Do you think this is a good idea? How would you improve the analysis?
 
